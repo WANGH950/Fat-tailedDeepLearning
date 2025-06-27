@@ -1,6 +1,6 @@
 # Deep Learning for High-dimensional PDEs with Fat-tailed L\'evy measure
 
-Authors: Kamran Arif, Heng Wang and Weihua Deng (dengwh@lzu.edu.cn)
+Authors: Kamran Arif, Guojiang Xi, Heng Wang and Weihua Deng (dengwh@lzu.edu.cn)
 
 Address: School of Mathematics and Statistics, State Key Laboratory of Natural Product Chemistry, Lanzhou University, Lanzhou 730000, China.
 

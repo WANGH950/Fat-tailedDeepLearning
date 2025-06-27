@@ -2,13 +2,12 @@ import torch.nn as nn
 from collections import OrderedDict
 
 class FNN(nn.Module):
-    def __init__(self, input_dim, output_dim, hidden_dim, number_layer=3, alpha=1):
+    def __init__(self, input_dim, output_dim, hidden_dim, number_layer=3):
         super(FNN, self).__init__()
         self.input_dim = input_dim
         self.output_dim = output_dim
         self.hidden_dim = hidden_dim
         self.number_layer = number_layer
-        self.alpha = alpha
         layers = []
         if number_layer == 0:
             layers.append(('output_layer', nn.Linear(input_dim, output_dim)))

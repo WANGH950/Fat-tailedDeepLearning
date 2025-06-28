@@ -45,14 +45,12 @@ class FPDE():
         Xt = torch.ones([N+1,size,self.d],device=device)*x
         num_jumps = torch.poisson(torch.ones([N,size],device=device)*self.cc*dt).int()
         for i in range(N):
-            jump_size_batch = self.power_law(num_jumps[i].sum(),r_max,device)
-            jump_ornot = num_jumps[i]>0
-            jump = [torch.zeros([0,self.d],device=device)]
-            jump_num = 0
-            for j in range(jump_ornot.sum()):
-                jump.append(torch.sum(jump_size_batch[jump_num:jump_num+num_jumps[i,jump_ornot][j]],dim=0,keepdim=True))
-                jump_num += num_jumps[i,jump_ornot][j]
-            jump_size[i,jump_ornot] = torch.cat(jump)
+            total_jumps = num_jumps[i].sum()
+            jump_sizei = self.power_law(total_jumps,r_max,device)
+            mask = torch.arange(total_jumps, device=device).expand(size, -1)
+            num_jump = torch.cumsum(torch.cat([torch.tensor([0],device=device),num_jumps[i]]),0).unsqueeze(-1)
+            mask = ((num_jump[:-1]<=mask) * (mask<num_jump[1:])).unsqueeze(-1)
+            jump_size[i] = (mask * jump_sizei).sum(dim=1)
             Xt[i+1] = Xt[i] + self.mu(Xt[i],i*dt)*dt + self.sigma*dB[i] + jump_size[i]
         return Xt, dB, jump_size
     
@@ -72,13 +70,11 @@ class FPDEG():
         Xt = torch.ones([N+1,size,self.d],device=device)*x
         num_jumps = torch.poisson(torch.ones([N,size],device=device)*self.lamb*dt).int()
         for i in range(N):
-            jump_size_batch = self.jump(num_jumps[i].sum(),device)
-            jump_ornot = num_jumps[i]>0
-            jump = [torch.zeros([0,self.d],device=device)]
-            jump_num = 0
-            for j in range(jump_ornot.sum()):
-                jump.append(torch.sum(jump_size_batch[jump_num:jump_num+num_jumps[i,jump_ornot][j]],dim=0,keepdim=True))
-                jump_num += num_jumps[i,jump_ornot][j]
-            jump_size[i,jump_ornot] = torch.cat(jump)
+            total_jumps = num_jumps[i].sum()
+            jump_sizei = self.jump(total_jumps,device)
+            mask = torch.arange(total_jumps, device=device).expand(size, -1)
+            num_jump = torch.cumsum(torch.cat([torch.tensor([0],device=device),num_jumps[i]]),0).unsqueeze(-1)
+            mask = ((num_jump[:-1]<=mask) * (mask<num_jump[1:])).unsqueeze(-1)
+            jump_size[i] = (mask * jump_sizei).sum(dim=1)
             Xt[i+1] = Xt[i] + self.mu(Xt[i],i*dt)*dt + jump_size[i]
         return Xt, jump_size

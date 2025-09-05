@@ -26,5 +26,18 @@ Our numerical results demonstrate that the algorithm achieves optimal stability 
 # Algorithm architecture
 ![Algorithm architecture](./structure.jpg)
 
-# How to use?
-We provide an invocation example in the notebook file "./example.ipynb", where you can define and modify any of the components in the sample for testing.
+# Example
+We provide an invocation `example` in the notebook file `"./example.ipynb"`, where you can define and modify any of the components in the sample for testing.
+
+# Citation
+```bibtex
+@article{Arif2025JCP,\
+  title = {Deep learning for high-dimensional {PDEs} with fat-tailed {L\'evy} measure},\
+  journal = {Journal of Computational Physics},\
+  volume = {541},\
+  pages = {114327},\
+  year = {2025},\
+  issn = {0021-9991},\
+  doi = {10.1016/j.jcp.2025.114327}\
+}
+```

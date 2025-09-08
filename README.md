@@ -31,13 +31,13 @@ We provide an invocation `example` in the notebook file `"./example.ipynb"`, whe
 
 # Citation
 ```bibtex
-@article{Arif2025JCP,\
-  title = {Deep learning for high-dimensional {PDEs} with fat-tailed {L\'evy} measure},\
-  journal = {Journal of Computational Physics},\
-  volume = {541},\
-  pages = {114327},\
-  year = {2025},\
-  issn = {0021-9991},\
-  doi = {10.1016/j.jcp.2025.114327}\
+@article{Arif2025JCP,
+  title = {Deep learning for high-dimensional {PDEs} with fat-tailed {L\'evy} measure},
+  journal = {Journal of Computational Physics},
+  volume = {541},
+  pages = {114327},
+  year = {2025},
+  issn = {0021-9991},
+  doi = {10.1016/j.jcp.2025.114327}
 }
 ```
